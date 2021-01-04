@@ -109,8 +109,9 @@ alias win="cd /mnt/c"
 # Disable % eof
 unsetopt prompt_cr prompt_sp
 
-cd ~
-
-#pfetch
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+
+export PF_INFO="ascii title os host kernel uptime pkgs memory"
+
+cd ~

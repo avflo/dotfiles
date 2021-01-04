@@ -1,6 +1,7 @@
 ## avflo theme
 
 local resetColor="%{$reset_color%}"
+#♪◮
 local logo="%{$fg_bold[green]%}♪$resetColor$resetColor"
 local hostname=`hostname`
 local dir="%{$fg_bold[white]%}%c$resetColor$resetColor"
