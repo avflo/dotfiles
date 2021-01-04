@@ -1,13 +1,10 @@
 <h3 align="center">
-    DOTFILES
+    Dotfiles
 </h3>
 <h6 align="center" style="color: #6c757d!important;">
-  Simple installer backup dotfiles
+  🔮 simple dotfiles configuration and backup
+  <br>
 </h6>
-
-<p align="center">
-
-</p>
 
 ![dotfiles](dotfiles.gif)
 
