@@ -10,7 +10,7 @@
 
 ## Installation and usage
 ```bash
-bash <( https://raw.githubusercontent.com/avflo/dotfiles/master/install)
+bash <(curl -s https://raw.githubusercontent.com/avflo/dotfiles/master/install)
 ```
 
 ## ⚖️ License
