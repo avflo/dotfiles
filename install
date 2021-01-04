@@ -1,0 +1,127 @@
+#!/bin/bash
+#!/usr/bin/env bash
+
+set -euo pipefail 
+
+#paths
+path=$(pwd)
+tmp=$path/tmp
+
+#colors
+red='\033[0;31m'
+green='\033[0;32m'
+purple='\033[0;35m'
+default='\033[0m'
+
+#const
+username='@avflo'
+
+#init tmp folder
+_create_tmp_folder(){
+    _show "TMP DIR"
+    _show
+    if [[ -d "$tmp" ]]; then
+        _show "remove old tmp dir:"
+        _show $tmp
+        sudo rm -R $tmp
+    fi
+    _show
+    _show "create tmp dir..."
+    mkdir $tmp
+    _show "OK ${green}✔ ${default}"
+    _separator
+    sleep 5
+}
+
+_show(){
+    # check more about ${1} here:
+    # https://stackoverflow.com/questions/20836612/what-does-1-1-in-bash-mean
+
+    local -r text="${1:-}"
+    echo -e "$text"
+}
+
+_separator(){
+    _show "${purple}_____________________${default}"
+    _show
+}
+
+_install_init_msg(){
+    local -r element="${1:-}"
+    _show "${element}"
+    _show "installing ${element} ..."
+    _show 
+}
+
+_install_end_msg(){
+    local -r element="${1:-}"
+    _show  
+    _show "${element} installed ${green}✔${default}"
+    _separator
+    sleep 2
+}
+
+_show 
+_show 
+_show "  ┌──────────────────────────────────────┐"
+_show "      👋🏻welcome to ${purple}${username}${default} dotfiles    "
+_show "  └──────────────────────────────────────┘"
+_show 
+_show " 🔨${green} installing... ${default}"
+_show 
+_show 
+
+#BASHRC
+_install_init_msg "BASHRC"
+ln -sf $path/.bashrc $HOME/.bashrc
+_install_end_msg "BASHRC"
+
+#ZSHRC
+_install_init_msg "ZSHRC"
+ln -sf $path/.zshrc $HOME/.zshrc
+_install_end_msg "ZSHRC"
+
+
+#ZSH THEME
+_install_init_msg "ZSH THEME"
+if [[ -d "$HOME/.oh-my-zsh/custom/themes/avflo/" ]]; then
+ rm -R $HOME/.oh-my-zsh/custom/themes/avflo/
+fi
+mkdir $HOME/.oh-my-zsh/custom/themes/avflo/
+ln -sf $path/avflo.zsh-theme $HOME/.oh-my-zsh/custom/themes/avflo/avflo.zsh-theme
+_install_end_msg "ZSH THEME"
+
+
+#external resources
+_show "${green}### ${default}DOWNLOADS ${green}###${default}"
+_show "${green}◭ ${red} PASSWORD COULD BE REQUIRED ${green}◭ ${default} "
+_show "# Downloanding external resources..."
+_separator
+
+_create_tmp_folder
+
+#FISH
+_install_init_msg "FISH - asciiquarium"
+_show 
+wget --no-check-certificate http://www.robobunny.com/projects/asciiquarium/asciiquarium -P $tmp
+rm -f /usr/local/bin/asciiquarium
+ln -sf $tmp/asciiquarium /usr/local/bin/
+sudo chmod 0755 /usr/local/bin/asciiquarium
+_install_end_msg "asciiquarium"
+
+#PFETCH
+_install_init_msg "PFETCH"
+_show " "
+wget https://github.com/dylanaraps/pfetch/archive/master.zip -P $tmp
+rm -f /usr/local/bin/pfetch
+sudo unzip $tmp/master.zip -d $tmp
+sudo ln -sf $tmp/pfetch-master/pfetch /usr/local/bin/pfetch
+ls -l /usr/local/bin/pfetch
+_show 
+pfetch
+_install_end_msg "pfetch"
+
+#
+_show "${green}dotfiles install complete ${default}! 🎉"
+_show "restart your terminal to apply the changes"
+_show
