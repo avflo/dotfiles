@@ -106,6 +106,8 @@ source $ZSH/oh-my-zsh.sh
 alias clima="curl wttr.in"
 alias pescao="asciiquarium"
 alias win="cd /mnt/c"
+alias ggraph="git log --all --decorate --oneline --graph"
+
 # Disable % eof
 unsetopt prompt_cr prompt_sp
 
