@@ -64,7 +64,7 @@ _install_end_msg(){
 _show 
 _show 
 _show "  ┌──────────────────────────────────────┐"
-_show "      👋🏻welcome to ${purple}${username}${default} dotfiles    "
+_show "      👋 welcome to ${purple}${username}${default} dotfiles    "
 _show "  └──────────────────────────────────────┘"
 _show 
 _show " 🔨${green} installing... ${default}"
@@ -92,6 +92,19 @@ ln -sf $path/avflo.zsh-theme $HOME/.oh-my-zsh/custom/themes/avflo/avflo.zsh-them
 _install_end_msg "ZSH THEME"
 
 
+#ZSH PLUGINS
+_install_init_msg "ZSH PLUGINS"
+if [[ !(-d "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions") ]]; then
+ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+fi
+_separator
+if [[ !(-d "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting") ]]; then
+ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+fi
+_install_end_msg "ZSH PLUGINS"
+_separator
+
+
 #external resources
 _show "${green}### ${default}DOWNLOADS ${green}###${default}"
 _show "${green}◭ ${red} PASSWORD COULD BE REQUIRED ${green}◭ ${default} "
@@ -102,11 +115,10 @@ _create_tmp_folder
 
 #FISH
 _install_init_msg "FISH - asciiquarium"
-_show 
-wget --no-check-certificate http://www.robobunny.com/projects/asciiquarium/asciiquarium -P $tmp
-rm -f /usr/local/bin/asciiquarium
-ln -sf $tmp/asciiquarium /usr/local/bin/
-sudo chmod 0755 /usr/local/bin/asciiquarium
+_show " "
+sudo rm -f /usr/local/bin/asciiquarium
+_separator
+sudo wget --no-check-certificate http://www.robobunny.com/projects/asciiquarium/asciiquarium -P /usr/local/bin/
 _install_end_msg "asciiquarium"
 
 #PFETCH
