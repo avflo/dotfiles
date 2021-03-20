@@ -118,14 +118,15 @@ _install_init_msg "FISH - asciiquarium"
 _show " "
 sudo rm -f /usr/local/bin/asciiquarium
 _separator
-sudo wget --no-check-certificate http://www.robobunny.com/projects/asciiquarium/asciiquarium -P /usr/local/bin/
+sudo add-apt-repository ppa:ytvwld/asciiquarium
+sudo apt-get update && sudo apt-get install asciiquarium
 _install_end_msg "asciiquarium"
 
 #PFETCH
 _install_init_msg "PFETCH"
 _show " "
 wget https://github.com/dylanaraps/pfetch/archive/master.zip -P $tmp
-rm -f /usr/local/bin/pfetch
+sudo rm -f /usr/local/bin/pfetch
 sudo unzip $tmp/master.zip -d $tmp
 sudo ln -sf $tmp/pfetch-master/pfetch /usr/local/bin/pfetch
 ls -l /usr/local/bin/pfetch
