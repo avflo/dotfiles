@@ -100,20 +100,25 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
+alias zshconfig="nano ~/.zshrc"
 alias clima="curl wttr.in"
 alias pescao="asciiquarium"
 alias win="cd /mnt/c"
 alias ggraph="git log --all --decorate --oneline --graph"
+#alias air='~/.air'
 
 # Disable % eof
 unsetopt prompt_cr prompt_sp
 
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+#export PATH="$HOME/.rbenv/bin:$PATH"
+#eval "$(rbenv init -)"
 
 export PF_INFO="ascii title os host kernel uptime pkgs memory"
+
+#Go
+export PATH=$PATH:/usr/local/go/bin
+export GO111MODULE=on
+export GOPATH=$HOME/go;
+export PATH=$PATH:$GOPATH/bin;
 
 cd ~

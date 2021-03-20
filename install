@@ -133,6 +133,13 @@ _show
 pfetch
 _install_end_msg "pfetch"
 
+#VIM
+_install_init_msg "NEOVIM"
+_show " "
+sudo apt install neovim
+_show
+_install_end_msg "neovim"
+
 #
 _show "${green}dotfiles install complete ${default}! 🎉"
 _show "restart your terminal to apply the changes"
