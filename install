@@ -14,7 +14,7 @@ purple='\033[0;35m'
 default='\033[0m'
 
 #const
-username='@avflo'
+username='@flvtwhite'
 
 #init tmp folder
 _create_tmp_folder(){
@@ -115,33 +115,60 @@ _create_tmp_folder
 
 #FISH
 _install_init_msg "FISH - asciiquarium"
-_show " "
-sudo rm -f /usr/local/bin/asciiquarium
-_separator
-sudo add-apt-repository ppa:ytvwld/asciiquarium
-sudo apt-get update && sudo apt-get install asciiquarium
-_install_end_msg "asciiquarium"
+_show
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+ sudo rm -f /usr/local/bin/asciiquarium
+ _separator
+ sudo add-apt-repository ppa:ytvwld/asciiquarium
+ sudo apt-get update && sudo apt-get install asciiquarium
+ _install_end_msg "asciiquarium"
+else
+ _show "FISH (asciiquarium) - NOT Installed "
+ _show
+fi
+
+
+#BREW (Mac OS X Only)
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    which -s brew
+    if [[ $? != 0 ]] ; then
+        _show   
+        # Install Homebrew
+        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        _show
+   fi
+fi 
+
+#VIM
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+ _install_init_msg "NEOVIM"
+ _show " "
+ sudo apt install neovim
+ _show
+ _install_end_msg "neovim"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+ _show "NEOVIM - NOT Installed ❌"
+fi
+
 
 #PFETCH
 _install_init_msg "PFETCH"
 _show " "
-wget https://github.com/dylanaraps/pfetch/archive/master.zip -P $tmp
-sudo rm -f /usr/local/bin/pfetch
-sudo unzip $tmp/master.zip -d $tmp
-sudo ln -sf $tmp/pfetch-master/pfetch /usr/local/bin/pfetch
-ls -l /usr/local/bin/pfetch
-_show 
-pfetch
-_install_end_msg "pfetch"
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+ wget https://github.com/dylanaraps/pfetch/archive/master.zip -P $tmp
+ sudo rm -f /usr/local/bin/pfetch
+ sudo unzip $tmp/master.zip -d $tmp
+ sudo ln -sf $tmp/pfetch-master/pfetch /usr/local/bin/pfetch
+ ls -l /usr/local/bin/pfetch
+ _show 
+ pfetch 
+ _install_end_msg "pfetch"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+ _show "PFETCH - NOT Installed ❌"
+fi
 
-#VIM
-_install_init_msg "NEOVIM"
-_show " "
-sudo apt install neovim
-_show
-_install_end_msg "neovim"
+
 
 #
 _show "${green}dotfiles install complete ${default}! 🎉"
 _show "restart your terminal to apply the changes"
-_show
